@@ -1,0 +1,42 @@
+[
+    {
+        "level": 1,
+        "description": "The password must be divided by *9*"
+    },
+    {
+        "level": 1,
+        "description": "The password must contain the answer of the *3!2!*"
+    },
+    {
+        "level": 1,
+        "description": "The password must contain the date of today!"
+    },
+    {
+        "level": 2,
+        "description": "The password must contain the city which held the *2016* Olympics."
+    },
+    {
+        "level": 2,
+        "description": "The password must contain the name of the most recent FIFA World Cup winning country."
+    },
+    {
+        "level": 2,
+        "description": "The password must contain the unit of electrical resistance"
+    },
+    {
+        "level": 3,
+        "description": "The password must include the ans of the following sokudo."
+    },
+    {
+        "level": 3,
+        "description": "The password must include the the answer of the following puzzle (brain teaser/ coded message/ riddle/ puzzling/ chess move/ crossword clue/ logic puzzle etc)"
+    },
+    {
+        "level": 3,
+        "description": "The password must include the the answer of the following language (play an audio)"
+    },
+    {
+        "level": "bonus",
+        "description": "The password must include the the answer of the following puzzle (oding-related challenge)"
+    }
+]

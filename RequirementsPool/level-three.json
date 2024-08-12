@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Sokudo",
+        "description": "The password must include the ans of the following sokudo."
+    },
+    {
+        "name": "Puzzle",
+        "description": "The password must include the the answer of the following puzzle (brain teaser/ coded message/ riddle/ puzzling/ chess move/ crossword clue/ logic puzzle etc)"
+    },
+    {
+        "name": "Audio-Language",
+        "description": "The password must include the the answer of the following language (play an audio)"
+    },
+    {
+        "name": "Coding",
+        "description": "The password must include the the answer of the following puzzle (coding-related challenge)"
+    }
+]
