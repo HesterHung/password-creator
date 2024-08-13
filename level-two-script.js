@@ -26,7 +26,7 @@ async function getData(url) { //return Ojb
 }
 
 function getDataFromLocal(){
-    dataFetched = getFromLocalStorage('dataFetched') || [];
+    dataFetched = getFromLocalStorage('dataFetched');
 }
 
 
@@ -47,6 +47,7 @@ function includeNobelPrize() {
     let randomCategory  = categoryArr[getRandomInt(0, 6)];
     console.log(randomYear, randomCategory)
     getData(`http://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${randomYear}&nobelPrizeCategory=${randomCategory}&format=json`);
+    //let category = dataFetched.nobelPrizeYear;
     getDataFromLocal();
     console.log(dataFetched);
 }
