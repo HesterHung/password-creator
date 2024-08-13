@@ -47,7 +47,7 @@ let progressArr = Array.apply(false, Array(10)).map(function () { }); //create a
 let replaceDescription = "";
 
 
-function storeInLocalStorage(key, data) {
+export function storeInLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
 
@@ -58,12 +58,11 @@ export function getFromLocalStorage(key) {
 
 // END OF LOADING REQUIREMENTS FROM JSON FILES SECTION
 
-localStorage.clear();
 
 //COMMON FUNCTION
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
+export function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function distrubutePool(lv) {
@@ -124,7 +123,7 @@ const initializeChosenRequirementArr = () => {
         }
     }
     pool = distrubutePool(4);
-    chosenRequirement[9] = pool[getRandomInt(pool.length)];
+    chosenRequirement[9] = pool[getRandomInt(0, pool.length)];
     console.log(chosenRequirement[9]);
 }
 
@@ -140,9 +139,9 @@ passwordInput.addEventListener('input', () => {
     updateProgressBar();
 });
 
-function getRequirement(){
-    for(let i = 0; i< 10; i++){
-        if(!progressArr[i]){
+function getRequirement() {
+    for (let i = 0; i < 10; i++) {
+        if (!progressArr[i]) {
             return chosenRequirement[i];
         }
     }
@@ -167,7 +166,7 @@ function MeetsRequirementConsole(input) {
         if (i == 0 || i == 1 || i == 2) {
             checkRequirementArr = levelOneConsole(currentRequirement.name, input);
             try {
-                
+
                 if (!(checkRequirementArr[0])) {
                     replaceDescription = checkRequirementArr[1];
                     progressArr[i] = false;
@@ -196,7 +195,7 @@ function MeetsRequirementConsole(input) {
             checkRequirementArr = levelThreeConsole(currentRequirement.name, input);
             try {
                 if (!(checkRequirementArr[0])) {
-                    replaceDescription = checkRequirementArr[1];                    
+                    replaceDescription = checkRequirementArr[1];
                     progressArr[i] = false;
                     continue;
                 }

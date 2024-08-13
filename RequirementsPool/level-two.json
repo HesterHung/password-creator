@@ -10,5 +10,10 @@
     {
         "name": "Unit",
         "description": "The password must contain the unit of electrical resistance"
+    },
+    {
+        "name": "Nobel-Prize",
+        "description": "The password must contain the last name of the rewarder of physic Nobel Price in 1967."
     }
+
 ]

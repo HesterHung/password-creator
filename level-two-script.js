@@ -1,39 +1,33 @@
-import { getFromLocalStorage } from "./script.js"
+import { storeInLocalStorage, getFromLocalStorage, getRandomInt } from "./script.js"
 
-let dataArrOne = [];
-let dataArrTwo = [];
-let dataArrThree = [];
+let dataFetched;
 
-//TEST AREA
-includeNobelPrize();
-//END OF TEST AREA
+//localStorage.clear('dataFetched');
 
-
-function fetchFromURL(url) {
-    fetch(url)
-        .then((response) => response.json())
-        .then((json) => { console.log(json.text); return json; });
-}
-// API endpoint URL
-
-async function getData(url) {
+//FETCH DATA USING API
+async function getData(url) { //return Ojb
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-      const json = await response.json();
-
-      console.log(json.nobelPrizes[0].category.en);
-      return json;
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        const json = await response.json();
+        storeInLocalStorage('dataFetched', json);
+        console.log(json.nobelPrizes[0].category.en);
     } catch (error) {
-      console.error(error.message);
+        console.error(error.message);
     }
-  }
 
-dataArrOne = getFromLocalStorage('dataArrOne') || [];
+}
 
-console.log(dataArrOne);
+function getDataFromLocal(){
+    dataFetched = getFromLocalStorage('dataFetched') || [];
+}
+
+
+//console.log(dataFetched);
+//END OF FETCH DATA USING API
+
 
 function levelTwoConsole(name, input) {
     switch (name) {
@@ -42,16 +36,25 @@ function levelTwoConsole(name, input) {
     }
 }
 
-function includeNobelPrize(){
-
-    console.log(getData("https://api.nobelprize.org/2.1/nobelPrizes?limit=1&format=json"));
+function includeNobelPrize() {
+    const categoryArr = ['che', 'eco', 'lit', 'phy', 'pea', 'med'];
+    let randomYear = getRandomInt(1901, new Date().getFullYear());
+    let randomCategory  = categoryArr[getRandomInt(0, 6)];
+    console.log(randomYear, randomCategory)
+    getData(`http://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${randomYear}&nobelPrizeCategory=${randomCategory}&format=json`);
+    getDataFromLocal();
+    console.log(dataFetched);
 }
+
+
 
 
 //COMMON FUCNTION
 
-function setURL(newURL){
-    url = newURL;
-}
+//TEST AREA
+includeNobelPrize();
+//END OF TEST AREA
+
+
 
 export default levelTwoConsole;
