@@ -1,64 +1,95 @@
 import { storeInLocalStorage, getFromLocalStorage, getRandomInt } from "./script.js"
 
-let dataFetched;
+let newDecription = '';
+let flagSET = false;
 
-//localStorage.clear('dataFetched');
+const commonData = {
+    data: [],
+    setData: function (dataFetched) {
+        this.data = dataFetched;
+    },
+    get: function () {
+        return this.data;
+    }
+};
 
-//TEST AREA
-includeNobelPrize();
-//END OF TEST AREA
-
-
-//FETCH DATA USING API
-async function getData(url) { //return Ojb
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+function getData(url) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                reject(new Error(`Response status: ${response.status}`));
+            }
+            const json = await response.json();
+            storeInLocalStorage('dataFetched', json);
+            await assignFromlocalStorage(json);
+            resolve(commonData.data);
+        } catch (error) {
+            reject(error);
         }
-        const json = await response.json();
-        storeInLocalStorage('dataFetched', await json);
-        //console.log(json.nobelPrizes[0].category.en);
-    } catch (error) {
-        console.error(error.message);
-    }
-
+    });
 }
 
-function getDataFromLocal(){
-    dataFetched = getFromLocalStorage('dataFetched');
+async function assignFromlocalStorage(dataFetched) {
+    commonData.setData(dataFetched);
+    console.log(commonData.data);
 }
 
-
-//console.log(dataFetched);
-//END OF FETCH DATA USING API
-
-
-function levelTwoConsole(name, input) {
+async function levelTwoConsole(name, input) {
     switch (name) {
-        case 'includeNobelPrize':
-            return includeNobelPrize();
+        case 'Nobel-Prize':
+            return await includeNobelPrize(input);
     }
 }
 
-function includeNobelPrize() {
+async function includeNobelPrize(input) {
     const categoryArr = ['che', 'eco', 'lit', 'phy', 'pea', 'med'];
-    let randomYear = getRandomInt(1901, new Date().getFullYear());
-    let randomCategory  = categoryArr[getRandomInt(0, 6)];
-    console.log(randomYear, randomCategory)
-    getData(`http://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${randomYear}&nobelPrizeCategory=${randomCategory}&format=json`);
-    //let category = dataFetched.nobelPrizeYear;
-    getDataFromLocal();
-    console.log(dataFetched);
+
+    let awardYear;
+    let awardCategory;
+    let lastNameArr = [];
+    let rtn_bool = false;
+    if (!flagSET) {
+        try {
+            let randomYear = getRandomInt(1901, new Date().getFullYear());
+            let randomCategory = categoryArr[getRandomInt(0, 6)];
+            console.log(randomYear, randomCategory) //DEBUG
+            const fetchedData = await getData(`http://api.nobelprize.org/2.1/nobelPrizes?nobelPrizeYear=${randomYear}&nobelPrizeCategory=${randomCategory}&format=json`);
+            if (fetchedData.nobelPrizes && fetchedData.nobelPrizes.length > 0 && fetchedData.nobelPrizes[0].awardYear) {
+                awardYear = commonData.data.nobelPrizes[0].awardYear;
+                awardCategory = commonData.data.nobelPrizes[0].category.en;
+                lastNameArr = commonData.data.nobelPrizes[0].laureates.map(getlastNameFromEachArr)
+
+                console.log(awardYear);
+                console.log(awardCategory);
+                console.log(lastNameArr);
+
+            } else {
+                console.log("Data not available yet.");
+                fetchedData.nobelPrizes.length || await includeNobelPrize(); // Re-fetch data if length = 0
+            }
+        } catch (error) {
+            console.error(error.message);
+            fetchedData.nobelPrizes.length || await includeNobelPrize(); // Re-fetch data
+        }
+        flagSET = true;
+    }
+
+    newDecription = `The password must include a last name of any laureate of The Nobel Prize in ${awardCategory} ${awardYear}.`
+
+    console.log("input: " + input.toLowerCase());
+    if (lastNameArr.includes(input.toLowerCase())) {
+        rtn_bool = true;
+        console.log("input: " + input.toLowerCase());
+    }
+    return new Array(rtn_bool, newDecription);
+}
+function getlastNameFromEachArr(obj) {
+    const fullName = obj.fullName.en.toLowerCase();
+    const lastName = fullName.split(' ').pop();
+    return lastName.toLowerCase();
 }
 
 
-
-
-//COMMON FUCNTION
-
-
-
-
-
+levelTwoConsole('includeNobelPrize');
 export default levelTwoConsole;

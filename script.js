@@ -136,6 +136,7 @@ progressCount.textContent = 0;
 passwordInput.addEventListener('input', () => {
     const userInput = passwordInput.value;
     displayRequirement(userInput);
+    MeetsRequirementConsole(userInput);
     updateProgressBar();
 });
 
@@ -148,7 +149,6 @@ function getRequirement() {
 }
 
 function displayRequirement(input) {
-    MeetsRequirementConsole(input);
     if (progressCountValue < 10) {
         requirementDisplay.textContent = replaceDescription || getRequirement().description; //empty string => false
     }
@@ -160,7 +160,7 @@ function displayRequirement(input) {
 function MeetsRequirementConsole(input) {
     for (let i = 0; i < 10; i++) {
         console.log("i:" + i);
-        let checkRequirementArr;
+        let checkRequirementArr; //2-size array: First: boolean ; Second: new Description
         let currentRequirement = chosenRequirement[i];
         console.log("Requirement:" + currentRequirement.name);
         if (i == 0 || i == 1 || i == 2) {
