@@ -13,6 +13,6 @@
     },
     {
         "name": "Coding",
-        "description": "The password must include the the answer of the following puzzle (coding-related challenge)"
+        "description": "The password must include the Big O of the following code (E.g. n³ should be written as n3)"
     }
 ]

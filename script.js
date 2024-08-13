@@ -148,14 +148,18 @@ function getRequirement(){
 }
 
 function displayRequirement(input) {
-    MeetsRequirementConsole(input);
+    MeetsRequirementConsole(input); // Check requirements
+
     if (progressCountValue < 10) {
-        requirementDisplay.textContent = replaceDescription || getRequirement().description; //empty string => false
-    }
-    if (progressCountValue >= 10) {
-        requirementDisplay.textContent = 'Congratulations! You have completed all requirements.';
+        const currentRequirement = getRequirement();
+        if (currentRequirement) {
+            requirementDisplay.textContent = currentRequirement.description;
+        } else {
+            requirementDisplay.textContent = 'Congratulations! No one can hack your password :>';
+        }
     }
 }
+
 
 function MeetsRequirementConsole(input) {
     for (let i = 0; i < 10; i++) {
