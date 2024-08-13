@@ -13,12 +13,13 @@ let progressCountValue = 0;
 
 // LOADING REQUIREMENTS FROM JSON FILES SECTION
 
+
 let requirementsPoolLvOne = [];
 let requirementsPoolLvTwo = [];
 let requirementsPoolLvThree = [];
 let requirementsPoolLvBonus = [];
 
-function fetchAndStoreData(url, key, pool) {
+export function fetchAndStoreData(url, key, pool) {
     if (pool.length === 0) {
         fetch(url)
             .then(response => response.json())
@@ -50,14 +51,14 @@ function storeInLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
 
-function getFromLocalStorage(key) {
+export function getFromLocalStorage(key) {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : null;
 }
 
 // END OF LOADING REQUIREMENTS FROM JSON FILES SECTION
 
-
+localStorage.clear();
 
 //COMMON FUNCTION
 
@@ -215,7 +216,7 @@ function MeetsRequirementConsole(input) {
                 }
                 progressArr[i] = true;
             } catch (err) {
-                console.log("Error: (LvBonus) Undefined Requirement." + err);
+                console.log("Error: (LvBonus) Undefined Requirement.\n" + err);
             }
         }
     }
