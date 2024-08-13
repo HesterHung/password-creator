@@ -4,6 +4,11 @@ let dataFetched;
 
 //localStorage.clear('dataFetched');
 
+//TEST AREA
+includeNobelPrize();
+//END OF TEST AREA
+
+
 //FETCH DATA USING API
 async function getData(url) { //return Ojb
     try {
@@ -12,8 +17,8 @@ async function getData(url) { //return Ojb
             throw new Error(`Response status: ${response.status}`);
         }
         const json = await response.json();
-        storeInLocalStorage('dataFetched', json);
-        console.log(json.nobelPrizes[0].category.en);
+        storeInLocalStorage('dataFetched', await json);
+        //console.log(json.nobelPrizes[0].category.en);
     } catch (error) {
         console.error(error.message);
     }
@@ -51,9 +56,7 @@ function includeNobelPrize() {
 
 //COMMON FUCNTION
 
-//TEST AREA
-includeNobelPrize();
-//END OF TEST AREA
+
 
 
 
