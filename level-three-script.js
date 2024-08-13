@@ -52,10 +52,10 @@ function hasSokudoAns(input){
     return input.includes(1234);
 }
 function hasPuzzleAns(input){
-    return input.toLowerCase().includes("Answer")
+    return input.toLowerCase().includes("answer")
 }
 function hasAudioAns(input){
-    return input.toLowerCase().includes("Audio");
+    return input.toLowerCase().includes("audio");
 }
 function hasCodeAns(input){
     return input.includes("n2");
