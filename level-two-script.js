@@ -2,6 +2,7 @@ import { storeInLocalStorage, getFromLocalStorage, getRandomInt } from "./script
 
 let newDecription = '';
 let flagSET = false;
+let extraTempDataArr = [];
 
 const commonData = {
     data: [],
@@ -35,10 +36,10 @@ async function assignFromlocalStorage(dataFetched) {
     console.log(commonData.data);
 }
 
-async function levelTwoConsole(name, input) {
+function levelTwoConsole(name, input) {
     switch (name) {
         case 'Nobel-Prize':
-            return await includeNobelPrize(input);
+            return includeNobelPrize(input.toLowerCase());
     }
 }
 
@@ -59,6 +60,7 @@ async function includeNobelPrize(input) {
                 awardYear = commonData.data.nobelPrizes[0].awardYear;
                 awardCategory = commonData.data.nobelPrizes[0].category.en;
                 lastNameArr = commonData.data.nobelPrizes[0].laureates.map(getlastNameFromEachArr)
+                extraTempDataArr = lastNameArr;
 
                 console.log(awardYear);
                 console.log(awardCategory);
@@ -77,11 +79,12 @@ async function includeNobelPrize(input) {
 
     newDecription = `The password must include a last name of any laureate of The Nobel Prize in ${awardCategory} ${awardYear}.`
 
-    console.log("input: " + input.toLowerCase());
-    if (lastNameArr.includes(input.toLowerCase())) {
+    if (extraTempDataArr.includes(input)) {
         rtn_bool = true;
-        console.log("input: " + input.toLowerCase());
+        console.log("inside " + input);
     }
+    console.log("last name arr: " + extraTempDataArr);
+    console.log("input: " + rtn_bool);
     return new Array(rtn_bool, newDecription);
 }
 function getlastNameFromEachArr(obj) {
@@ -90,6 +93,13 @@ function getlastNameFromEachArr(obj) {
     return lastName.toLowerCase();
 }
 
+function getArr(arr){
+    if(typeof arr === 'undefined'){
+        arr = [];
+        console.log('define!')
+    }
+    return arr;
+}
 
 levelTwoConsole('includeNobelPrize');
 export default levelTwoConsole;

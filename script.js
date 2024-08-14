@@ -180,6 +180,7 @@ function MeetsRequirementConsole(input) {
         } else if (i == 3 || i == 4 || i == 5) {
             checkRequirementArr = levelTwoConsole(currentRequirement.name, input);
             try {
+                console.log("CONSOLE!" + checkRequirementArr[1]);
                 if (!(checkRequirementArr[0])) {
                     replaceDescription = checkRequirementArr[1];
                     progressArr[i] = false;
