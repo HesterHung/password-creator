@@ -1,18 +1,22 @@
 [
     {
         "name": "Sokudo",
-        "description": "The password must include the ans of the following sokudo."
+        "description": "The password must include the ans of the following sokudo in order from left to right, up to down.",
+        "imageselector": "sokudo.jpg"
     },
     {
         "name": "Puzzle",
-        "description": "The password must include the the answer of the following puzzle (brain teaser/ coded message/ riddle/ puzzling/ chess move/ crossword clue/ logic puzzle etc)"
+        "description": "The password must include the the answer of the following puzzle",
+        "imageselector":"Puzzle.png"
     },
     {
         "name": "Audio-Language",
-        "description": "The password must include the the answer of the following language (play an audio)"
+        "description": "the question must include the sound the animal shown in the picture makes",
+        "imageselector":"cat.jpg"
     },
     {
         "name": "Coding",
-        "description": "The password must include the Big O of the following code (E.g. n³ should be written as n3)"
+        "description": "The password must include the Big O of the following code (E.g. n³ should be written as n3)",
+        "imageselector": "CodeImage.png"
     }
 ]

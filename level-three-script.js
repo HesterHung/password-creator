@@ -1,4 +1,5 @@
 let replaceDescription;
+let replaceImage;
 
 function levelThreeConsole(name, input){
     switch(name){
@@ -16,14 +17,16 @@ function levelThreeConsole(name, input){
 //function
 function includeSokudo(input){
     replaceDescription = "";
+    replaceImage= "";
     if (hasSokudoAns(input)){
-        return new Array(true, replaceDescription);
+        return new Array(true, replaceDescription,replaceImage);
     }
     return new Array(false, replaceDescription);
 }
 
 function includePuzzle(input){
     replaceDescription = "";
+    replaceImage = "";
     if (hasPuzzleAns(input)){
         return new Array(true, replaceDescription);
     }
@@ -32,6 +35,7 @@ function includePuzzle(input){
 
 function includeAudio(input){
     replaceDescription =  "";
+    replaceImage = "";
     if (hasAudioAns(input)){
         return new Array(true, replaceDescription);
     }
@@ -40,6 +44,7 @@ function includeAudio(input){
 
 function includeCode(input){
     replaceDescription = "";
+    replaceImage = "";
     if (hasCodeAns(input)){
         return new Array(true, replaceDescription);
     }
@@ -49,13 +54,13 @@ function includeCode(input){
 
 //check input
 function hasSokudoAns(input){
-    return input.includes(1234);
+    return input.includes(14231423);
 }
 function hasPuzzleAns(input){
-    return input.toLowerCase().includes("answer")
+    return input.toLowerCase().includes("towel")
 }
 function hasAudioAns(input){
-    return input.toLowerCase().includes("audio");
+    return input.toLowerCase().includes("meow");
 }
 function hasCodeAns(input){
     return input.includes("n2");

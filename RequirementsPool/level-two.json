@@ -1,14 +1,17 @@
 [
     {
         "name": "Olympic-City",
-        "description": "The password must contain the city which held the *2016* Olympics."
+        "description": "The password must contain the city which held the *2016* Olympics.",
+        "imageselector": ""
     },
     {
         "name": "FIFA-Winning-Country",
-        "description": "The password must contain the name of the most recent FIFA World Cup winning country."
+        "description": "The password must contain the name of the most recent FIFA World Cup winning country.",
+        "imageselector": ""
     },
     {
         "name": "Unit",
-        "description": "The password must contain the unit of electrical resistance"
+        "description": "The password must contain the unit of electrical resistance",
+        "imageselector": ""
     }
 ]

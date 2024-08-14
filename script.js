@@ -6,6 +6,7 @@ import levelBonusConsole from "./level-bonus-script.js";
 
 const passwordInput = document.getElementById('password-input');
 const requirementDisplay = document.getElementById('requirement-display');
+const imageselector = document.getElementById('image-display')
 const progressBar = document.querySelector('.progress');
 const progressCount = document.querySelector('#progress-count');
 
@@ -44,6 +45,7 @@ let chosenRequirement = [];
 let pool;
 let progressArr = Array.apply(false, Array(10)).map(function () { }); //create an empty boolean array
 let replaceDescription = "";
+let replaceImage = "";
 
 
 function storeInLocalStorage(key, data) {
@@ -154,8 +156,11 @@ function displayRequirement(input) {
         const currentRequirement = getRequirement();
         if (currentRequirement) {
             requirementDisplay.textContent = currentRequirement.description;
+            imageselector.src = currentRequirement.imageselector;
+
         } else {
             requirementDisplay.textContent = 'Congratulations! No one can hack your password :>';
+            imageselector.src = "";
         }
     }
 }

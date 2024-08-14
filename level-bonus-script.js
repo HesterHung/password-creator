@@ -1,4 +1,5 @@
 let replaceDescription;
+let replaceImage;
 
 function levelBonusConsole(name, input){
     switch(name){
@@ -12,9 +13,9 @@ function levelBonusConsole(name, input){
 function includeBonusPuzzle(input){
     replaceDescription = ""; // empty string mean no need to change the content of description, otherwise, type the content you wish to change here.
     if (hasBonusAns(input)) {
-        return new Array(true, replaceDescription);
+        return new Array(true, replaceDescription,replaceImage);
     }
-    return new Array(false, replaceDescription);
+    return new Array(false, replaceDescription,replaceImage);
 
 }
 
