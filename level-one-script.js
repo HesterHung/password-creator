@@ -1,4 +1,5 @@
 let replaceDescription;
+let replaceImage;
 
 function levelOneConsole(name, input) {
     switch (name) {
@@ -19,25 +20,25 @@ function levelOneConsole(name, input) {
 function includeUpperLetter(input) {
     replaceDescription = ""; // empty string mean no need to change the content of description, otherwise, type the content you wish to change here.
     if (hasUppercaseLetters(input)) {
-        return new Array(true, replaceDescription);
+        return new Array(true, replaceDescription,replaceImage);
     }
-    return new Array(false, replaceDescription);
+    return new Array(false, replaceDescription,replaceImage);
 }
 
 function includeLowerLetter(input) {
     replaceDescription = "";
     if (hasLowercaseLetters(input)) {
-        return new Array(true, replaceDescription);
+        return new Array(true, replaceDescription,replaceImage);
     }
-    return new Array(false, replaceDescription);
+    return new Array(false, replaceDescription,replaceImage);
 }
 
 function includeNumber(input) {
     replaceDescription = "";
     if (hasNumber(input)) {
-        return new Array(true, replaceDescription);
+        return new Array(true, replaceDescription,replaceImage);
     }
-    return new Array(false, replaceDescription);
+    return new Array(false, replaceDescription,replaceImage);
 }
 
 //END OF REQUIREMENT FUNCTION SECTION

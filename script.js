@@ -6,6 +6,7 @@ import levelBonusConsole from "./level-bonus-script.js";
 
 const passwordInput = document.getElementById('password-input');
 const requirementDisplay = document.getElementById('requirement-display');
+const imageselector = document.getElementById('image-display')
 const progressBar = document.querySelector('.progress');
 const progressCount = document.querySelector('#progress-count');
 
@@ -45,6 +46,7 @@ let chosenRequirement = [];
 let pool;
 let progressArr = Array.apply(false, Array(10)).map(function () { }); //create an empty boolean array
 let replaceDescription = "";
+let replaceImage = "";
 
 
 export function storeInLocalStorage(key, data) {
@@ -149,18 +151,26 @@ function getRequirement() {
 }
 
 function displayRequirement(input) {
+    MeetsRequirementConsole(input); // Check requirements
+
     if (progressCountValue < 10) {
-        requirementDisplay.textContent = replaceDescription || getRequirement().description; //empty string => false
-    }
-    if (progressCountValue >= 10) {
-        requirementDisplay.textContent = 'Congratulations! You have completed all requirements.';
+        const currentRequirement = getRequirement();
+        if (currentRequirement) {
+            requirementDisplay.textContent = currentRequirement.description;
+            imageselector.src = currentRequirement.imageselector;
+
+        } else {
+            requirementDisplay.textContent = 'Congratulations! No one can hack your password :>';
+            imageselector.src = "";
+        }
     }
 }
+
 
 function MeetsRequirementConsole(input) {
     for (let i = 0; i < 10; i++) {
         console.log("i:" + i);
-        let checkRequirementArr; //2-size array: First: boolean ; Second: new Description
+        let checkRequirementArr = new Array(2); //2-size array: First: boolean ; Second: new Description
         let currentRequirement = chosenRequirement[i];
         console.log("Requirement:" + currentRequirement.name);
         if (i == 0 || i == 1 || i == 2) {
@@ -178,11 +188,11 @@ function MeetsRequirementConsole(input) {
             }
 
         } else if (i == 3 || i == 4 || i == 5) {
-            checkRequirementArr = levelTwoConsole(currentRequirement.name, input);
+            let [isMatch, description] = levelTwoConsole(currentRequirement.name, input);
             try {
-                console.log("CONSOLE!" + checkRequirementArr[1]);
-                if (!(checkRequirementArr[0])) {
-                    replaceDescription = checkRequirementArr[1];
+                console.log("CONSOLE!" + description);
+                if (!(isMatch)) {
+                    replaceDescription = description;
                     progressArr[i] = false;
                     continue;
                 }

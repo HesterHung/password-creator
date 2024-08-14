@@ -1,14 +1,17 @@
 [
     {
         "name": "Include-UpperLetter",
-        "description": "The password must include at least one uppercase letter."
+        "description": "The password must include at least one uppercase letter.",
+        "imageselector":""
     },
     {
         "name": "Include-LowerLetter",
-        "description": "The password must include at least one lowercase letter."
+        "description": "The password must include at least one lowercase letter.",
+        "imageselector": ""
     },
     {
         "name": "Include-Number",
-        "description": "The password must include at least one number."
+        "description": "The password must include at least one number.",
+        "imageselector": ""
     }
 ]

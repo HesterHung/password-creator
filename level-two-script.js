@@ -1,3 +1,6 @@
+let replaceDescription;
+const winning_city = ["Argentina", "France", "Germany", "Spain", "Italy", "Brazil", "England", "Uruguay",];
+
 import { storeInLocalStorage, getFromLocalStorage, getRandomInt } from "./script.js"
 
 let newDecription = '';
@@ -39,8 +42,49 @@ async function assignFromlocalStorage(dataFetched) {
 function levelTwoConsole(name, input) {
     switch (name) {
         case 'Nobel-Prize':
-            return includeNobelPrize(input.toLowerCase());
+            return includeNobelPrize(input.toLowerCase())
+        case 'Olympic-City':
+            return includeOlympicCity(input);
+        case 'FIFA-Winning-Country':
+            return includeFIFAWinningCountry(input);
+        case 'Unit':
+            return includeUnit(input)
     }
+}
+
+
+
+
+//End
+
+
+
+
+
+
+
+//Requirement Function to Get Result
+function includeOlympicCity(input) {
+    replaceDescription = ""; // empty string mean no need to change the content of description, otherwise, type the content you wish to change here.
+    if (hasOlympicCity(input)) {
+        return new Array(true, replaceDescription);
+    }
+    return new Array(false, replaceDescription);
+}
+function includeFIFAWinningCountry(input) {
+    replaceDescription = ""; // empty string mean no need to change the content of description, otherwise, type the content you wish to change here.
+    if (hasCountry(input)) {
+        return new Array(true, replaceDescription);
+    }
+    return new Array(false, replaceDescription);
+}
+
+function includeUnit(input) {
+    replaceDescription = ""; // empty string mean no need to change the content of description, otherwise, type the content you wish to change here.
+    if (hasUnit(input)) {
+        return new Array(true, replaceDescription);
+    }
+    return new Array(false, replaceDescription);
 }
 
 async function includeNobelPrize(input) {
@@ -79,27 +123,57 @@ async function includeNobelPrize(input) {
 
     newDecription = `The password must include a last name of any laureate of The Nobel Prize in ${awardCategory} ${awardYear}.`
 
-    if (extraTempDataArr.includes(input)) {
-        rtn_bool = true;
-        console.log("inside " + input);
+    for (let n of extraTempDataArr) {
+        if (input.includes(n)) {
+            rtn_bool = true;
+            break;
+        }
+        console.log(n);
     }
+
     console.log("last name arr: " + extraTempDataArr);
     console.log("input: " + rtn_bool);
-    return new Array(rtn_bool, newDecription);
+    console.log("new: "+ newDecription);
+    let rtn_arr = [rtn_bool, newDecription];
+    console.log("new: "+ rtn_arr[1]);
+
+    return new Array();
 }
+
+
 function getlastNameFromEachArr(obj) {
     const fullName = obj.fullName.en.toLowerCase();
     const lastName = fullName.split(' ').pop();
     return lastName.toLowerCase();
 }
 
-function getArr(arr){
-    if(typeof arr === 'undefined'){
+function getArr(arr) {
+    if (typeof arr === 'undefined') {
         arr = [];
         console.log('define!')
     }
     return arr;
 }
 
-levelTwoConsole('includeNobelPrize');
+
+//End
+
+//Function check
+function hasOlympicCity(input) {
+    return input.toLowerCase().includes("rio");
+}
+
+function hasCountry(input) {
+    return input.toLowerCase().includes("argentina")
+}
+
+function hasUnit(input) {
+    return input.toLowerCase().includes("ohm");
+}
+
+//End
+
+
+
+
 export default levelTwoConsole;
